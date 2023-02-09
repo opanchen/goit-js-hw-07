@@ -38,14 +38,21 @@ function onImageClick(e) {
       <div class="modal">
       <img src="${selectedImgLink}" width="800" height="600">
       </div>
-      `
+      `,
+    {
+      onShow: modal => {
+        document.addEventListener('keydown', onEsc);
+      },
+      onClose: modal => {
+        document.removeEventListener('keydown', onEsc);
+      },
+    }
   );
 
   showModal();
 
   function showModal() {
     modal.show();
-    document.addEventListener('keydown', onEsc);
   }
 
   function onEsc(e) {
@@ -53,7 +60,6 @@ function onImageClick(e) {
     // console.log(`KeyCode ${e.code}`);
     if (e.code === 'Escape') {
       modal.close();
-      document.removeEventListener('keydown', onEsc);
     }
   }
 }
